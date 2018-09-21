@@ -1,6 +1,6 @@
 var WebSocketServer = require('ws').Server;
 
-var wss = new WebSocketServer({port:9090});
+var wss = new WebSocketServer({port:7778});
 
 // users list
 var users = {};
