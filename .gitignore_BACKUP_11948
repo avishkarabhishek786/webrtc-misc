@@ -1,5 +1,7 @@
+<<<<<<< HEAD
+node_modules
 package-lock.json
-
+=======
 # Logs
 logs
 *.log
@@ -61,3 +63,4 @@ typings/
 
 # next.js build output
 .next
+>>>>>>> 45ba166567a4ae4ee1bd4eccbda4e442ee4dfbe7
