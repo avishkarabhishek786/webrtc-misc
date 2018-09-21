@@ -105,6 +105,8 @@ wss.on('connection', function(connection){
     });
 
     connection.on("close", function() {
+        console.log(connection);
+        
         if (connection.name) {
             delete users[connection.name];
             if (connection.otherName) {
@@ -127,4 +129,6 @@ wss.on('connection', function(connection){
 
 function sendTo(connection, message) {
     connection.send(JSON.stringify(message));
+    //connection.send(message);
+    console.log("sent..........", JSON.stringify(message));
 }
