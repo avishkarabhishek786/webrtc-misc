@@ -1,6 +1,13 @@
 var WebSocketServer = require('ws').Server;
+var express = require('express')
 
-var wss = new WebSocketServer({port:7778});
+var wss = new WebSocketServer({port:9090});
+
+var app = express()
+
+app.get('/', function (req, res) {
+    res.sendfile(__dirname + '/index.html');
+ })
 
 // users list
 var users = {};
@@ -11,7 +18,7 @@ wss.on('connection', function(connection){
 
     // When a user arrives
     connection.on('message', function(message) {
-        console.log("Got message from a user", message);
+        console.log("Got message from a user ", message);
 
         var data;
          try {
@@ -132,3 +139,8 @@ function sendTo(connection, message) {
     //connection.send(message);
     console.log("sent..........", JSON.stringify(message));
 }
+
+
+app.listen(7878, function () {
+    console.log('Example app listening on port 7878!')
+ })

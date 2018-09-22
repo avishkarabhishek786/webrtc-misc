@@ -166,8 +166,6 @@ callBtn.addEventListener('click', function() {
 function handleOffer(offer, name) {
     connectedUser = name;
 
-    //var remote_pc = new RTCPeerConnection(configuration)
-
     yourConn.setRemoteDescription(new RTCSessionDescription(offer));
 
     // create an answer to the offer
