@@ -1,21 +1,20 @@
+var socket = io();
+
 var name;
 var connectedUser;
- //var conn = new WebSocket('ws://localhost:9090');
-var HOST = location.origin.replace(/^http/, 'ws')
-var conn = new WebSocket(HOST);
 
-conn.onopen = function() {
+socket.on('connect', function() {
     console.log("Connected to signalling server.");
-}
+});
 
 // When message is received from the signalling server
-conn.onmessage = function (msg) {
-    console.log("Got messageeeee: ", msg.data);
+socket.on('message', function (msg) {
+    console.log("Got messageeeee: ", msg);
 
     try {
-        var data = JSON.parse(msg.data);
+        var data = JSON.parse(msg);
     } catch(e) {
-        var data = msg.data;
+        var data = msg;
     }    
 
     switch (data.type) {
@@ -43,11 +42,11 @@ conn.onmessage = function (msg) {
         default:
             break;
     }
-}
+});
 
-conn.onerror = function(err) {
+socket.on('error', function(err) {
     console.error("Error: ", err);    
-}
+});
 
 // alias for sending JSON encoded message
 function send(message) {
@@ -55,7 +54,8 @@ function send(message) {
         message.name = connectedUser;
     }
 
-    conn.send(JSON.stringify(message));
+    //conn.send(JSON.stringify(message));
+    socket.emit('message', JSON.stringify(message));
 }
 
 //UI selectors block
