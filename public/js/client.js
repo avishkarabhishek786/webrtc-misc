@@ -1,6 +1,8 @@
 var name;
 var connectedUser;
-var conn = new WebSocket('ws://localhost:9090');
+ //var conn = new WebSocket('ws://localhost:9090');
+var HOST = location.origin.replace(/^http/, 'ws')
+var conn = new WebSocket(HOST);
 
 conn.onopen = function() {
     console.log("Connected to signalling server.");
