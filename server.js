@@ -3,6 +3,8 @@ var express = require('express')
 
 var wss = new WebSocketServer({port:9090});
 
+let port = process.env.PORT || 8001
+
 var app = express()
 
 app.get('/', function (req, res) {
@@ -141,6 +143,6 @@ function sendTo(connection, message) {
 }
 
 
-app.listen(7878, function () {
-    console.log('Example app listening on port 7878!')
+app.listen(port, function () {
+    console.log('Example app listening on port '+port);
  })
