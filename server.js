@@ -1,5 +1,8 @@
+const path = require('path');
 var WebSocketServer = require('ws').Server;
 var express = require('express')
+
+const routes = require('./routes');
 
 var wss = new WebSocketServer({port:9090});
 
@@ -7,9 +10,24 @@ let port = process.env.PORT || 8001
 
 var app = express()
 
-app.get('/', function (req, res) {
-    res.sendfile(__dirname + '/index.html');
- })
+app.set('view engine', 'ejs');
+
+const middleware = [
+    express.static(path.join(__dirname, 'public'))
+]
+
+app.use(middleware)
+
+app.use('/', routes);
+
+app.use((req, res,next)=>{
+  res.status(404).send("Page Not Found");
+});
+
+app.use((err, req, res, next)=>{
+  console.log(err);
+  res.status(500).send("Page Broke!");
+});
 
 // users list
 var users = {};
